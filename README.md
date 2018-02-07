@@ -12,4 +12,4 @@ YYProject.RichTextBoxEx: VS 2017, .NET 4.5.2, C# 7.2
 
 Demo: VS 2017, .NET 4.5.2, C# 7.0
 
-All public and propected members has detailed annotation, so this doc is brief  P:)
+All public and propected members have detailed annotation, so this doc is brief  P:)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace YYProject.RichEdit
 {
@@ -6,6 +7,7 @@ namespace YYProject.RichEdit
     ///  Describes the Spacing between lines of the text.
     /// </summary>
     [Serializable]
+    [TypeConverter(typeof(SpacingConverter))]
     readonly public struct RTBLineSpacing : IEquatable<RTBLineSpacing>
     {
 

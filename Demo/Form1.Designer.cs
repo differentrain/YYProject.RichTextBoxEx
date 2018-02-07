@@ -57,9 +57,7 @@
             this.RichTextBoxEx1.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RichTextBoxEx1.Location = new System.Drawing.Point(12, 12);
             this.RichTextBoxEx1.Name = "RichTextBoxEx1";
-            this.RichTextBoxEx1.SelectionLineSpacing = ((YYProject.RichEdit.RTBLineSpacing)(resources.GetObject("RichTextBoxEx1.SelectionLineSpacing")));
-            this.RichTextBoxEx1.SelectionParaSpacing = ((YYProject.RichEdit.RTBParaSpacing)(resources.GetObject("RichTextBoxEx1.SelectionParaSpacing")));
-            this.RichTextBoxEx1.Size = new System.Drawing.Size(532, 382);
+            this.RichTextBoxEx1.Size = new System.Drawing.Size(520, 379);
             this.RichTextBoxEx1.TabIndex = 0;
             this.RichTextBoxEx1.Text = resources.GetString("RichTextBoxEx1.Text");
             // 

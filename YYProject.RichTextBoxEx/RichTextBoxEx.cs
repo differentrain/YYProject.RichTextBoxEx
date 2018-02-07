@@ -149,7 +149,6 @@ namespace YYProject.RichEdit
         /// Gets or sets the paragraph spacing of the current text selection or insertion point.
         /// </summary>
         [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public RTBParaSpacing SelectionParaSpacing
         {
             get
@@ -181,7 +180,6 @@ namespace YYProject.RichEdit
         /// Gets or sets the line spacing of the current text selection or insertion point.
         /// </summary>
         [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public RTBLineSpacing SelectionLineSpacing
         {
             get

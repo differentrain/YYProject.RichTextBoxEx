@@ -1,4 +1,8 @@
 ﻿using System;
+using System.ComponentModel;
+using System.ComponentModel.Design.Serialization;
+using System.Globalization;
+using System.Reflection;
 using System.Runtime.InteropServices;
 
 namespace YYProject.RichEdit
@@ -81,8 +85,73 @@ namespace YYProject.RichEdit
         public Int16 wBorderSpace;
         public Int16 wBorderWidth;
         public Int16 wBorders;
+
+
     }
 
+    internal class SpacingConverter : TypeConverter
+    {
+        public override Boolean CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
+        {
 
+            if (sourceType == typeof(String))
+            {
+                return true;
+            }
+            return base.CanConvertFrom(context, sourceType);
+        }
+
+        public override Object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, Object value)
+        {
+            if (value is String)
+            {
+                String[] v = ((String)value).Split(',');
+
+                if (Int32.TryParse(v[1], out var s))
+                {
+                    return new RTBParaSpacing(Int32.Parse(v[0]), Int32.Parse(v[1]));
+                }
+                return new RTBLineSpacing(Int32.Parse(v[0]), (RTBLineSpacingRule)Enum.Parse(typeof(RTBLineSpacingRule), v[1]));
+            }
+            return base.ConvertFrom(context, culture, value);
+        }
+        // Overrides the ConvertTo method of TypeConverter.
+        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+        {
+            if (destinationType == typeof(String))
+            {
+                if (value is RTBParaSpacing)
+                {
+                    return ((RTBParaSpacing)value).ToString();
+                }
+
+
+
+
+                return ((RTBLineSpacing)value).ToString();
+            }
+
+            if (destinationType == typeof(InstanceDescriptor))
+            {
+                ConstructorInfo constructorInfo;
+                if (value is RTBParaSpacing v)
+                {
+                    constructorInfo = typeof(RTBParaSpacing).GetConstructor(new[] { typeof(Int32), typeof(Int32) });
+                    return new InstanceDescriptor(constructorInfo, new object[] { v.Before, v.After });
+                }
+                var b = (RTBLineSpacing)value;
+                constructorInfo = typeof(RTBLineSpacing).GetConstructor(new[] { typeof(Int32), typeof(RTBLineSpacingRule) });
+                return new InstanceDescriptor(constructorInfo, new object[] { b.Spacing, b.Rule });
+            }
+
+            return base.ConvertTo(context, culture, value, destinationType);
+        }
+
+        public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
+        {
+            return destinationType == typeof(String) || destinationType == typeof(InstanceDescriptor) || base.CanConvertTo(context, destinationType);
+        }
+
+    }
 
 }

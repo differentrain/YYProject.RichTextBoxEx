@@ -138,6 +138,7 @@ namespace YYProject.RichEdit
                 {
                     _ReadOnly = value;
                     base.ReadOnly = value != RTBReadOnlyMode.Not;
+                    this.RecreateHandle();
                     OnReadOnlyChanged(EventArgs.Empty);
                 }
 
@@ -148,6 +149,7 @@ namespace YYProject.RichEdit
         /// Gets or sets the paragraph spacing of the current text selection or insertion point.
         /// </summary>
         [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public RTBParaSpacing SelectionParaSpacing
         {
             get
@@ -179,6 +181,7 @@ namespace YYProject.RichEdit
         /// Gets or sets the line spacing of the current text selection or insertion point.
         /// </summary>
         [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public RTBLineSpacing SelectionLineSpacing
         {
             get
@@ -228,7 +231,15 @@ namespace YYProject.RichEdit
         /// </summary>
         /// <param name="e">Event data.</param>
         protected override void OnReadOnlyChanged(EventArgs e) => ReadOnlyChanged?.Invoke(this, e);
-    
+
+        /// <summary>
+        /// Returns the line index for the first line that is currently visible in the <see cref="RichTextBoxEx"/>.
+        /// </summary>
+        /// <returns>The line index for the first line that is currently visible in the text box.</returns>
+        public Int64 GetFirstVisibleLineIndex()
+        {
+            return NativeMember.SendMessage(new HandleRef(this, this.Handle), NativeMember.EM_GETFIRSTVISIBLELINE, IntPtr.Zero, IntPtr.Zero).ToInt64();
+        }
 
         #endregion
 

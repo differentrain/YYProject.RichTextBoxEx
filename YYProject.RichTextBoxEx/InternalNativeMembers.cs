@@ -22,6 +22,7 @@ namespace YYProject.RichEdit
                             RTB_HORIZ = 0x0001,
                             RTB_VERT = 0x0002,
                             RTB_FORCE = 0x0010,
+                            EM_GETFIRSTVISIBLELINE = 0xCE,
                             EM_GETPARAFORMAT = 0x0400 + 61,
                             EM_SETPARAFORMAT = 0x0400 + 71,
                             EM_SETOPTIONS = 0x0400 + 77,
